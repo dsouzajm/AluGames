@@ -1,5 +1,4 @@
 import com.google.gson.Gson
-import java.lang.Exception
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -30,12 +29,18 @@ fun main() {
 
     var gson = Gson()
 
-    try {
+    var resultado = runCatching {
         var meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
         var meuJogo2 = Jogo(meuInfoJogo.info.title,
-                            meuInfoJogo.info.thumb)
+            meuInfoJogo.info.thumb)
         println(meuJogo2)
-    } catch(ex:Exception){
+    }
+
+    resultado.onFailure {
         println("Erro, tente outro id")
+    }
+
+    resultado.onSuccess {
+        println("Chamada da API realizada com sucesso")
     }
 }
