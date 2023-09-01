@@ -1,4 +1,5 @@
 import com.google.gson.Gson
+import java.lang.Exception
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -28,8 +29,13 @@ fun main() {
     println(meuJogo)
 
     var gson = Gson()
-    var meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
-    var meuJogo2 = Jogo(meuInfoJogo.info.title,
-                        meuInfoJogo.info.thumb)
-    println(meuJogo2)
+
+    try {
+        var meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+        var meuJogo2 = Jogo(meuInfoJogo.info.title,
+                            meuInfoJogo.info.thumb)
+        println(meuJogo2)
+    } catch(ex:Exception){
+        println("Erro, tente outro id")
+    }
 }
