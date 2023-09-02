@@ -1,11 +1,5 @@
-import br.com.alura.model.InfoJogo
 import br.com.alura.model.Jogo
 import br.com.alura.service.ApiJogo
-import com.google.gson.Gson
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse.BodyHandlers
 import java.util.*
 
 fun main() {
