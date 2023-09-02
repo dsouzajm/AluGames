@@ -9,38 +9,35 @@ import java.util.*
 fun main() {
 
     var scanner = Scanner(System.`in`)
-    println("Digite o codigo: ")
+    println("Digite o codigo do jogo: ")
     var codigoDigitado = scanner.nextLine()
     var urlApi = "https://www.cheapshark.com/api/1.0/games?id=$codigoDigitado"
     println(urlApi)
 
     val client: HttpClient = HttpClient.newHttpClient()
     val request = HttpRequest.newBuilder()
-        .uri(URI.create(urlApi))
-        .build()
-    val response = client
-        .send(request, BodyHandlers.ofString())
+                                .uri(URI.create(urlApi))
+                                .build()
+    val response = client.send(request, BodyHandlers.ofString())
     val json = response.body()
-    println(json)
-
-    val meuJogo = Jogo( "Batman: Arkham Asylum Game of the Year Edition",
-                        "https:\\/\\/cdn.cloudflare.steamstatic.com\\/steam\\/apps\\/35140\\/capsule_sm_120.jpg?t=1681938587")
-    println(meuJogo)
-
     var gson = Gson()
-
+    var meuJogo:Jogo? = null
+       
     var resultado = runCatching {
         var meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
-        var meuJogo2 = Jogo(meuInfoJogo.info.title,
-            meuInfoJogo.info.thumb)
-        println(meuJogo2)
+        meuJogo = Jogo(meuInfoJogo.info.title,
+                       meuInfoJogo.info.thumb)
     }
 
     resultado.onFailure {
-        println("Erro, tente outro id")
+        println("Erro, tente outro id.")
     }
 
     resultado.onSuccess {
-        println("Chamada da API realizada com sucesso")
+        println("Digite a descricao:")
+        val descricaoDigitada = scanner.nextLine()
+        meuJogo?.descricao = descricaoDigitada
+        println(meuJogo)
+        println("Chamada da API realizada com sucesso.")
     }
 }
