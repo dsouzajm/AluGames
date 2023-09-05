@@ -46,7 +46,7 @@ data class Gamer(var nome:String, var email:String) {
     }
 
     companion object {
-        fun criarGamer(leitura: Scanner): Gamer {
+        fun criaGamer(leitura: Scanner): Gamer {
             println("Bem-vindos ao AluGames! Vamos fazer seu cadastro. Digite seu nome:")
             val nome = leitura.nextLine()
             println("Digite seu e-mail:")

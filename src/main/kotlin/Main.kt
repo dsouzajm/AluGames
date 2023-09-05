@@ -1,13 +1,16 @@
 import br.com.alura.model.Gamer
 import br.com.alura.model.Jogo
+import br.com.alura.retornaIdade
 import br.com.alura.service.ApiJogo
 import java.util.*
 
 fun main() {
 
     var scanner = Scanner(System.`in`)
-    var gamer = Gamer.criarGamer(scanner)
+    var gamer = Gamer.criaGamer(scanner)
     println(gamer)
+    println("\nA idade do gamer e:")
+    println(gamer.dataNascimento?.retornaIdade())
 
     do {
         println("Digite o codigo do jogo que deseja pesquisar: ")
