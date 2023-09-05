@@ -9,8 +9,7 @@ fun main() {
     var scanner = Scanner(System.`in`)
     var gamer = Gamer.criaGamer(scanner)
     println(gamer)
-    println("\nA idade do gamer e:")
-    println(gamer.dataNascimento?.retornaIdade())
+    println("\nA idade do gamer e:" + gamer.dataNascimento?.retornaIdade())
 
     do {
         println("Digite o codigo do jogo que deseja pesquisar: ")
@@ -59,15 +58,20 @@ fun main() {
     println("\nEsses sao os jogos pesquisados filtrados:")
     println(jogosFiltrados)
 
+    println("\nExibindo somente o titulo dos filmes:")
+    gamer.jogosPesquisados.forEach {
+        println(it?.titulo)
+    }
+
     println("\nDeseja excluir algum elmento da lista de filmes pesquisados? Digite S/N.")
     val respostaExclusao = scanner.nextLine()
     if(respostaExclusao.equals("S", true)) {
-        println("\nDigite o indice a ser excluido da lista:")
+        println("Digite o indice a ser excluido da lista:")
         val indiceExclusao = scanner.nextInt()
         gamer.jogosPesquisados.removeAt(indiceExclusao)
-        println("\nEsses sao os jogos pesquisados apos a exclusao:")
+        println("Esses sao os jogos pesquisados apos a exclusao:")
         println(gamer.jogosPesquisados)
     }
 
-    println("Chamada da API realizada com sucesso.")
+    println("\nChamada da API realizada com sucesso.")
 }
