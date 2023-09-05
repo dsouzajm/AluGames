@@ -41,7 +41,30 @@ fun main() {
         val respostaContinuacao = scanner.nextLine()
     } while (respostaContinuacao.equals("S", true))
 
-    println("Esses foram os jogos pesquisados:")
+    println("\nEsses sao os jogos pesquisados:")
     println(gamer.jogosPesquisados)
+
+    gamer.jogosPesquisados.sortBy {
+        it?.titulo
+    }
+    println("\nEsses sao os jogos pesquisados ordenados:")
+    println(gamer.jogosPesquisados)
+
+    val jogosFiltrados = gamer.jogosPesquisados.filter {
+        it?.titulo?.contains("Batman", true)?: false
+    }
+    println("\nEsses sao os jogos pesquisados filtrados:")
+    println(jogosFiltrados)
+
+    println("\nDeseja excluir algum elmento da lista de filmes pesquisados? Digite S/N.")
+    val respostaExclusao = scanner.nextLine()
+    if(respostaExclusao.equals("S", true)) {
+        println("\nDigite o indice a ser excluido da lista:")
+        val indiceExclusao = scanner.nextInt()
+        gamer.jogosPesquisados.removeAt(indiceExclusao)
+        println("\nEsses sao os jogos pesquisados apos a exclusao:")
+        println(gamer.jogosPesquisados)
+    }
+
     println("Chamada da API realizada com sucesso.")
 }
