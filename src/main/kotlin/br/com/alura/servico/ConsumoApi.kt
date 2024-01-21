@@ -13,24 +13,27 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 class ConsumoApi {
+    private fun consomeDados(url: String): String {
+
+        val client: HttpClient = HttpClient.newHttpClient()
+        val request = HttpRequest.newBuilder().uri(URI.create(url)).build()
+        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+
+        return response.body()
+    }
     fun buscaJogo(id:String):InfoJogo{
 
-        var urlApi = "https://www.cheapshark.com/api/1.0/games?id=$id"
-        val client: HttpClient = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder().uri(URI.create(urlApi)).build()
-        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        val json = response.body()
+        var url = "https://www.cheapshark.com/api/1.0/games?id=$id"
+        val json = consomeDados(url)
         var gson = Gson()
         var meuJogo: Jogo? = null
+
         return gson.fromJson(json, InfoJogo::class.java)
     }
     fun buscaJogador(): List<Gamer> {
 
-        var urlApi = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
-        val client: HttpClient = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder().uri(URI.create(urlApi)).build()
-        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        val json = response.body()
+        var url = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
+        val json = consomeDados(url)
         val gson = Gson()
         val meuGamerTipo = object : TypeToken<List<InfoGamerJson>>() {}.type
 
