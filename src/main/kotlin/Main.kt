@@ -1,7 +1,7 @@
-import br.com.alura.model.Gamer
-import br.com.alura.model.Jogo
+import br.com.alura.modelo.Gamer
+import br.com.alura.modelo.Jogo
 import br.com.alura.retornaIdade
-import br.com.alura.service.ApiJogo
+import br.com.alura.servico.ConsumoApi
 import java.util.*
 
 fun main() {
@@ -14,7 +14,7 @@ fun main() {
     do {
         println("Digite o codigo do jogo que deseja pesquisar: ")
         var codigoDigitado = scanner.nextLine()
-        var serviceApiJogo = ApiJogo()
+        var serviceApiJogo = ConsumoApi()
         val meuInfoJogo = serviceApiJogo.buscaJogo(codigoDigitado)
         var meuJogo:Jogo? = null
 

@@ -1,4 +1,4 @@
-import br.com.alura.model.Gamer
+import br.com.alura.modelo.Gamer
 
 fun main() {
     var gamer1 = Gamer("Fulano",
@@ -20,4 +20,10 @@ fun main() {
         it.usuario = "danielsouzajm1"
     }
     println("Gamer1='$gamer1")
+}
+
+class TesteInfoGamer {
+    fun main(){
+
+    }
 }
