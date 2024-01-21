@@ -1,9 +1,10 @@
 package br.com.alura.servico
 
 import br.com.alura.modelo.Gamer
-import br.com.alura.modelo.InfoJogadorJson
+import br.com.alura.modelo.InfoGamerJson
 import br.com.alura.modelo.InfoJogo
 import br.com.alura.modelo.Jogo
+import br.com.alura.utilitario.criaGamer
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URI
@@ -31,10 +32,10 @@ class ConsumoApi {
         val response = client.send(request, HttpResponse.BodyHandlers.ofString())
         val json = response.body()
         val gson = Gson()
-        val meuGamerTipo = object : TypeToken<List<InfoJogadorJson>>() {}.type
+        val meuGamerTipo = object : TypeToken<List<InfoGamerJson>>() {}.type
 
-        val listaInfoJogadorJson: List<InfoJogadorJson> = gson.fromJson(json, meuGamerTipo)
-        val listaConvertidaGamer: List<Gamer> = listaInfoJogadorJson.map { listaInfoJogadorJson -> Gamer(listaInfoJogadorJson.nome, listaInfoJogadorJson.email, listaInfoJogadorJson.dataNascimento, listaInfoJogadorJson.usuario) }
+        val listaInfoJogadorJson: List<InfoGamerJson> = gson.fromJson(json, meuGamerTipo)
+        val listaConvertidaGamer: List<Gamer> = listaInfoJogadorJson.map { listaInfoJogadorJson ->  listaInfoJogadorJson.criaGamer() }
         return listaConvertidaGamer
     }
 }
