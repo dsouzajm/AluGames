@@ -1,6 +1,6 @@
 import br.com.alura.modelo.Gamer
 import br.com.alura.modelo.Jogo
-import br.com.alura.retornaIdade
+import br.com.alura.utilitario.retornaIdade
 import br.com.alura.servico.ConsumoApi
 import java.util.*
 

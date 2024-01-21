@@ -1,4 +1,4 @@
-package br.com.alura
+package br.com.alura.utilitario
 
 import java.time.LocalDate
 import java.time.Period

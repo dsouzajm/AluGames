@@ -1,5 +1,6 @@
 package br.com.alura.servico
 
+import br.com.alura.modelo.Gamer
 import br.com.alura.modelo.InfoJogadorJson
 import br.com.alura.modelo.InfoJogo
 import br.com.alura.modelo.Jogo
@@ -22,7 +23,7 @@ class ConsumoApi {
         var meuJogo: Jogo? = null
         return gson.fromJson(json, InfoJogo::class.java)
     }
-    fun buscaJogador(): List<InfoJogadorJson> {
+    fun buscaJogador(): List<Gamer> {
 
         var urlApi = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
         val client: HttpClient = HttpClient.newHttpClient()
@@ -32,6 +33,8 @@ class ConsumoApi {
         val gson = Gson()
         val meuGamerTipo = object : TypeToken<List<InfoJogadorJson>>() {}.type
 
-        return gson.fromJson(json, meuGamerTipo)
+        val listaInfoJogadorJson: List<InfoJogadorJson> = gson.fromJson(json, meuGamerTipo)
+        val listaConvertidaGamer: List<Gamer> = listaInfoJogadorJson.map { listaInfoJogadorJson -> Gamer(listaInfoJogadorJson.nome, listaInfoJogadorJson.email, listaInfoJogadorJson.dataNascimento, listaInfoJogadorJson.usuario) }
+        return listaConvertidaGamer
     }
 }
